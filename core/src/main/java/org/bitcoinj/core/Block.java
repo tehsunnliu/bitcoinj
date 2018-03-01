@@ -56,7 +56,7 @@ public class Block extends Message {
     private static final Logger log = LoggerFactory.getLogger(Block.class);
 
     /** How many bytes are required to represent a block header WITHOUT the trailing 00 length byte. */
-    public static final int HEADER_SIZE = 80;
+    public static final int HEADER_SIZE = 80; // Ulord's header size is same of Bitcoin's header size
 
     static final long ALLOWED_TIME_DRIFT = 2 * 60 * 60; // Same value as Bitcoin Core.
 
@@ -65,13 +65,14 @@ public class Block extends Message {
      * upgrade everyone to change this, so Bitcoin can continue to grow. For now it exists as an anti-DoS measure to
      * avoid somebody creating a titanically huge but valid block and forcing everyone to download/store it forever.
      */
-    public static final int MAX_BLOCK_SIZE = 1 * 1000 * 1000;
+    public static final int MAX_BLOCK_SIZE = 1 * 1000 * 4000; // Same blocksize as in Ulord.
+
     /**
      * A "sigop" is a signature verification operation. Because they're expensive we also impose a separate limit on
      * the number in a block to prevent somebody mining a huge block that has way more sigops than normal, so is very
      * expensive/slow to verify.
      */
-    public static final int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE / 50;
+    public static final int MAX_BLOCK_SIGOPS = MAX_BLOCK_SIZE / 50; // Same value as Ulord.
 
     /** A value for difficultyTarget (nBits) that allows half of all possible hash solutions. Used in unit testing. */
     public static final long EASIEST_DIFFICULTY_TARGET = 0x207fFFFFL;
